@@ -7,19 +7,13 @@
     currentAttempt,
   } from "../lib/store";
 
-  // const trasposeGuesses = (guesses) => {
-  //   const transposedGuesses = [];
-  //   guesses.forEach((guess) => {
-  //     // If guess is empty, replace it with 5 char long whitespace char
-  //     guess === ""
-  //       ? transposedGuesses.push("     ")
-  //       : transposedGuesses.push(guess);
-  //   });
-  //   return transposedGuesses;
-  // };
-
-  // $: transposedGuesses = trasposeGuesses($guesses);
-
+  $: getCurrentGuess = () => {
+    let currGuess = $currentGuess;
+    while (currGuess.length < 5) {
+      currGuess+="‎"
+    }
+    return currGuess;
+  };
   const getLetterClass = (guess, letter, index) => {
     keyboardLetterClass.update((obj) => obj);
     if (letter === " ") {
@@ -62,7 +56,6 @@
   };
 </script>
 
-<p>{$currentGuess}</p>
 {#each $guesses as guess, index}
   <div class="guesses">
     {#if guess}
@@ -72,7 +65,7 @@
         </div>
       {/each}
     {:else if $currentAttempt == index}
-      {#each $currentGuess.split("") as letter, letterIndex}
+      {#each getCurrentGuess().split("") as letter, letterIndex}
         <div class="letter">
           {letter}
         </div>

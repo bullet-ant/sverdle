@@ -1,12 +1,20 @@
 <script>
-  import { haveWon } from "../lib/store";
-  $: modalActive = $haveWon;
-  export let message = "";
+  import { currentAttempt, haveWon, maxGuesses, word } from "../lib/store";
+  $: haveLost = $currentAttempt == $maxGuesses ? true : false;
+  $: gameOver = $haveWon || haveLost;
+  $: modalActive = gameOver;
+
+  let winMessage = "Congratulations! You won! 🎉";
+  let lostMessage = `Oops! The word is ${$word}`;
 </script>
 
 <div class="my-modal" class:active={modalActive}>
   <div class="my-modal-body">
-    {message}
+    {#if $haveWon}
+      {winMessage}
+    {:else if haveLost}
+      {lostMessage}
+    {/if}
   </div>
 </div>
 <div id="overlay" class:active={modalActive} />
@@ -29,7 +37,9 @@
     transform: translate(-50%, -50%) scale(1);
   }
   .my-modal-body {
-    padding: 10px;
+    font-size: 20px;
+    text-align: center;
+    padding: 50px;
   }
   #overlay {
     position: fixed;
