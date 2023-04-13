@@ -7,3 +7,4 @@ export const guesses = writable(["", "", "", "", "", ""]);
 export const word = writable("APPLE");
 export const currentAttempt = writable(0);
 export const keyboardLetterClass = writable(Object.fromEntries([...new Set("abcdefghijklmnopqrstuvwxyz")].map(char => [char, ""])))
+export const currentGuess = writable("")

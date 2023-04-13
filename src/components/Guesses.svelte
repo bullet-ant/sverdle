@@ -1,18 +1,24 @@
 <script>
-  import { guesses, word, keyboardLetterClass } from "../lib/store";
+  import {
+    guesses,
+    currentGuess,
+    word,
+    keyboardLetterClass,
+    currentAttempt,
+  } from "../lib/store";
 
-  const trasposeGuesses = (guesses) => {
-    const transposedGuesses = [];
-    guesses.forEach((guess) => {
-      // If guess is empty, replace it with 5 char long whitespace char
-      guess === ""
-        ? transposedGuesses.push("     ")
-        : transposedGuesses.push(guess);
-    });
-    return transposedGuesses;
-  };
+  // const trasposeGuesses = (guesses) => {
+  //   const transposedGuesses = [];
+  //   guesses.forEach((guess) => {
+  //     // If guess is empty, replace it with 5 char long whitespace char
+  //     guess === ""
+  //       ? transposedGuesses.push("     ")
+  //       : transposedGuesses.push(guess);
+  //   });
+  //   return transposedGuesses;
+  // };
 
-  $: transposedGuesses = trasposeGuesses($guesses);
+  // $: transposedGuesses = trasposeGuesses($guesses);
 
   const getLetterClass = (guess, letter, index) => {
     keyboardLetterClass.update((obj) => obj);
@@ -56,13 +62,28 @@
   };
 </script>
 
-{#each transposedGuesses as guess}
+<p>{$currentGuess}</p>
+{#each $guesses as guess, index}
   <div class="guesses">
-    {#each guess.split("") as letter, index}
-      <div class={`letter ${getLetterClass(guess, letter, index)}`}>
-        {letter}
-      </div>
-    {/each}
+    {#if guess}
+      {#each guess.split("") as letter, letterIndex}
+        <div class={`letter ${getLetterClass(guess, letter, letterIndex)}`}>
+          {letter}
+        </div>
+      {/each}
+    {:else if $currentAttempt == index}
+      {#each $currentGuess.split("") as letter, letterIndex}
+        <div class="letter">
+          {letter}
+        </div>
+      {/each}
+    {:else}
+      {#each new Array(5).fill(" ") as letter}
+        <div class="letter">
+          {letter}
+        </div>
+      {/each}
+    {/if}
   </div>
 {/each}
 <br />

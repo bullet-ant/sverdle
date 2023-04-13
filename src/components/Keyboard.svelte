@@ -2,7 +2,7 @@
   import { keyboardLetterClass } from "../lib/store";
   let keys = ["QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM"];
 
-  const getKeyboardLetterClass = (letter) => {
+  $: getKeyboardLetterClass = (letter) => {
     return $keyboardLetterClass[letter.toLowerCase()];
   };
 </script>
