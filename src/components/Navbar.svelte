@@ -1,6 +1,6 @@
 <script></script>
 <div class="heading">
-  <h1>SVERDLE</h1>
+  <h1>Wordle War</h1>
   <hr>
 </div>
 

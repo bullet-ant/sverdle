@@ -12,11 +12,5 @@
     "@sveltejs/vite-plugin-svelte": "^2.0.3",
     "svelte": "^3.55.1",
     "vite": "^4.2.0"
-  },
-  "dependencies": {
-    "bootstrap": "^4.6.2",
-    "jquery": "^3.6.4",
-    "popper.js": "^1.16.1",
-    "svelte-materialify": "^0.3.11"
   }
 }

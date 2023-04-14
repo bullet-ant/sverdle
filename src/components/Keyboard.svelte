@@ -1,19 +1,43 @@
 <script>
-  import { keyboardLetterClass } from "../lib/store";
+  import { currentGuess, keyboardLetterClass } from "../lib/store";
   let keys = ["QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM"];
 
   $: getKeyboardLetterClass = (letter) => {
     return $keyboardLetterClass[letter.toLowerCase()];
   };
+  const handleClick = (letter) => {
+    if ($currentGuess.length < 5) {
+      $currentGuess += letter;
+    }
+  };
 </script>
 
-{#each keys as key}
-  <div class="keyboard">
-    {#each key.split("") as letter}
-      <button class={`${getKeyboardLetterClass(letter)}`}>
-        {letter}
-      </button>
-    {/each}
+{#each keys as key, index}
+  <div class="container-fluid">
+    <div class="row justify-content-center keyboard">
+      {#if index == 2}
+        <div class="col-xs-1">
+          <button><i class="fa fa-check" aria-hidden="true" /></button>
+        </div>
+      {/if}
+      {#each key.split("") as letter}
+        <div class="col-xs-1">
+          <button
+            on:click={() => handleClick(letter)}
+            class={`${getKeyboardLetterClass(letter)}`}
+          >
+            {letter}
+          </button>
+        </div>
+      {/each}
+      {#if index == 2}
+        <div class="col-xs-1">
+          <button>
+            <i class="fa fa-backspace" />
+          </button>
+        </div>
+      {/if}
+    </div>
   </div>
 {/each}
 

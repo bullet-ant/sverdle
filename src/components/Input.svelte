@@ -6,6 +6,8 @@
     haveWon,
     word,
   } from "../lib/store";
+  import { getWordList } from "../lib/wordSelector";
+
   const handleKeydown = (e) => {
     const key = e.keyCode;
 
@@ -22,13 +24,18 @@
     // Enter key pressed
     if (e.keyCode === 13) {
       if ($currentGuess.length === 5) {
-        $guesses[$currentAttempt] = $currentGuess;
-        currentAttempt.update((attempt) => attempt + 1);
+        if (getWordList().indexOf($currentGuess.toLowerCase()) != -1) {
+          $guesses[$currentAttempt] = $currentGuess;
+          currentAttempt.update((attempt) => attempt + 1);
 
-        if ($currentGuess.toLowerCase() === $word.toLowerCase())
-          haveWon.set(true);
+          if ($currentGuess.toLowerCase() === $word.toLowerCase())
+            haveWon.set(true);
+          $currentGuess = "";
+        }else {
+          // console.log(getWordList().includes('apple'));
+          console.log(getWordList());
+        }
       }
-      $currentGuess = "";
     }
     guesses.update((obj) => obj);
     console.log(
