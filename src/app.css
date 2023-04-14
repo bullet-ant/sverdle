@@ -50,11 +50,18 @@
   background-color: #eeeeee;
   border: white solid;
   color: grey;
-  width: 45px;
-  padding: 12px;
+  /* width: 45px; */
+  padding: 12px 14px;
   text-align: center;
   text-decoration: none;
   font-size: 20px;
   display: inline-block;
   font-weight: bold;
+}
+
+@media (max-width: 425px) {
+  .keyboard button {
+    font-size: 18px;
+    padding: 12px 12px;
+  }
 }
