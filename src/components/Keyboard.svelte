@@ -1,5 +1,13 @@
 <script>
-  import { currentGuess, keyboardLetterClass } from "../lib/store";
+  import {
+    currentAttempt,
+    currentGuess,
+    guesses,
+    haveWon,
+    keyboardLetterClass,
+    word,
+  } from "../lib/store";
+  import { getWordList } from "../lib/wordSelector";
   let keys = ["QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM"];
 
   $: getKeyboardLetterClass = (letter) => {
@@ -10,6 +18,25 @@
       $currentGuess += letter;
     }
   };
+  const handleEnter = () => {
+    if ($currentGuess.length === 5) {
+      if (getWordList().indexOf($currentGuess.toLowerCase()) != -1) {
+        $guesses[$currentAttempt] = $currentGuess;
+        currentAttempt.update((attempt) => attempt + 1);
+
+        if ($currentGuess.toLowerCase() === $word.toLowerCase())
+          haveWon.set(true);
+        $currentGuess = "";
+      } else {
+        // console.log(getWordList().includes('apple'));
+        console.log(getWordList());
+      }
+    }
+  };
+
+  const handleDelete = () => {
+    $currentGuess = $currentGuess.slice(0, -1);
+  };
 </script>
 
 {#each keys as key, index}
@@ -17,7 +44,9 @@
     <div class="row justify-content-center keyboard">
       {#if index == 2}
         <div class="col-xs-1">
-          <button><i class="fa fa-check" aria-hidden="true" /></button>
+          <button on:click={handleEnter}
+            ><i class="fa fa-check" aria-hidden="true" /></button
+          >
         </div>
       {/if}
       {#each key.split("") as letter}
@@ -32,7 +61,7 @@
       {/each}
       {#if index == 2}
         <div class="col-xs-1">
-          <button>
+          <button on:click={handleDelete}>
             <i class="fa fa-backspace" />
           </button>
         </div>
