@@ -6,7 +6,7 @@
     haveWon,
     word,
   } from "../lib/store";
-  import { getWordList } from "../lib/wordSelector";
+  import { getWordList } from "../lib/word_selector";
 
   const handleKeydown = (e) => {
     const key = e.keyCode;

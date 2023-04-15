@@ -1,5 +1,5 @@
 import { writable } from "svelte/store";
-import { selectRandomWord } from "./wordSelector";
+import { selectRandomWord } from "./word_selector";
 
 export const haveWon = writable(false);
 export const boardState = writable([]);

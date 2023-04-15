@@ -1,4 +1,5 @@
 <script>
+  import { quintOut } from "svelte/easing";
   import {
     guesses,
     currentGuess,
@@ -6,11 +7,14 @@
     keyboardLetterClass,
     currentAttempt,
   } from "../lib/store";
+  import { fade, fly, slide } from "svelte/transition";
+  import { flip } from "svelte/animate";
 
+  const invisibleChar = `‎`;
   $: getCurrentGuess = () => {
     let currGuess = $currentGuess;
     while (currGuess.length < 5) {
-      currGuess+="‎"
+      currGuess += invisibleChar;
     }
     return currGuess;
   };
@@ -56,22 +60,26 @@
   };
 </script>
 
+<!-- Guesses: ["WORD1", "WORD2", "", "", ""] -->
 {#each $guesses as guess, index}
   <div class="guesses">
     {#if guess}
+      <!-- Splitted Guess: ["W" ,"O", "R", "D", "1"] -->
       {#each guess.split("") as letter, letterIndex}
         <div class={`letter ${getLetterClass(guess, letter, letterIndex)}`}>
           {letter}
         </div>
       {/each}
+      <!-- Current Guess: ["W", "O"] (as the user inputs) -->
     {:else if $currentAttempt == index}
       {#each getCurrentGuess().split("") as letter, letterIndex}
         <div class="letter">
           {letter}
         </div>
       {/each}
+      <!-- Fill empty guesses with invisible character -->
     {:else}
-      {#each new Array(5).fill(" ") as letter}
+      {#each new Array(5).fill(invisibleChar) as letter}
         <div class="letter">
           {letter}
         </div>

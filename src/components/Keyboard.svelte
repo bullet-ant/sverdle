@@ -7,7 +7,7 @@
     keyboardLetterClass,
     word,
   } from "../lib/store";
-  import { getWordList } from "../lib/wordSelector";
+  import { getWordList } from "../lib/word_selector";
   let keys = ["QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM"];
 
   $: getKeyboardLetterClass = (letter) => {
@@ -44,9 +44,9 @@
     <div class="row justify-content-center keyboard">
       {#if index == 2}
         <div class="col-xs-1">
-          <button on:click={handleEnter}
-            ><i class="fa fa-check" aria-hidden="true" /></button
-          >
+          <button on:click={handleDelete} class="action-button">
+            <i class="fa fa-backspace" />
+          </button>
         </div>
       {/if}
       {#each key.split("") as letter}
@@ -61,9 +61,9 @@
       {/each}
       {#if index == 2}
         <div class="col-xs-1">
-          <button on:click={handleDelete}>
-            <i class="fa fa-backspace" />
-          </button>
+          <button on:click={handleEnter} class="action-button"
+            ><i class="fa fa-check" aria-hidden="true" /></button
+          >
         </div>
       {/if}
     </div>
@@ -71,6 +71,10 @@
 {/each}
 
 <style>
+  .action-button {
+    background-color: rgb(169, 170, 255);
+    color: white;
+  }
   .letter-correct {
     background-color: #6aaa64;
     color: white;
