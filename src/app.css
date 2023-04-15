@@ -59,10 +59,30 @@
   font-weight: bold;
 }
 
-@media (max-width: 425px) {
+/* @media (max-width: 720px) {
+
   .keyboard button {
     font-size: 16px;
     padding: 12px 12px;
     margin-bottom: 18px;
+  }
+} */
+@media (max-width: 540px) {
+  .keyboard button {
+    font-size: 16px;
+    padding: 12px 12px;
+    margin-bottom: 14px;
+    margin-left: 2px;
+    margin-right: 2px;
+  }
+  .guesses {
+    height: 50px;
+  }
+  .letter {
+    font-size: 20px;
+    font-weight: bold;
+    padding: 15px 15px;
+    width: 45px;
+    height: 45px;
   }
 }
