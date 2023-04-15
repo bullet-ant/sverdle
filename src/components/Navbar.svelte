@@ -1,7 +1,8 @@
 <script></script>
+
 <div class="heading">
-  <h1>Sverdle</h1>
-  <hr>
+  Sverdle
+  <hr />
 </div>
 
 <style>

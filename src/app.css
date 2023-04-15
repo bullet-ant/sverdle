@@ -1,6 +1,8 @@
 .heading {
   text-align: center;
   padding-top: 10px;
+  font-size: 42px;
+  font-weight: bold;
   font-family: "Nova Oval", cursive;
 }
 .guesses {
@@ -76,13 +78,34 @@
     margin-right: 2px;
   }
   .guesses {
-    height: 50px;
+    height: 60px;
   }
   .letter {
     font-size: 20px;
     font-weight: bold;
     padding: 15px 15px;
-    width: 45px;
+    width: 55px;
+    height: 55px;
+  }
+}
+@media (max-width: 402px) {
+  .heading {
+    font-size: 25px;
+
+  }
+  .keyboard button {
+    font-size: 16px;
+    padding: 10px 9px;
+    margin-bottom: 5px;
+  }
+  .guesses {
     height: 45px;
+  }
+  .letter {
+    font-size: 20px;
+    font-weight: bold;
+    padding: 15px 15px;
+    width: 42px;
+    height: 42px;
   }
 }
