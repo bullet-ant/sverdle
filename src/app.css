@@ -1,4 +1,3 @@
-
 .guesses {
   text-align: center;
   height: 62px;
@@ -64,9 +63,10 @@
   color: grey;
   background-color: #eeeeee;
   border: none;
-  margin: 2px;
-  padding: 14px 14px;
-  margin: 8px 3px 0 3px;
+  width: 45px;
+  height: 60px;
+  /* padding: 14px 14px; */
+  margin: 8px 2px 0 2px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -122,26 +122,30 @@
     font-size: 30px;
   }
   .keyboard button {
-    font-size: 17px;
-    padding: 15px 16px;
-    margin: 10px 2px 0px 2px;
+    font-size: 18px;
+    width: 45px;
+    height: 60px;
+    /* padding: 14px 14px; */
+    margin: 8px 2px 0 2px;
   }
   .guesses {
-    height: 60px;
+    height: 62px;
   }
   .letter {
-    font-size: 20px;
+    font-size: 26px;
     font-weight: bold;
     padding: 15px 15px;
     width: 55px;
     height: 55px;
   }
 }
-@media (max-width: 474px) {
+@media (max-width: 492px) {
   .keyboard button {
     font-size: 15px;
-    padding: 14px;
-    margin: 10px 1px 0px 2px;
+    width: 40px;
+    height: 55px;
+    /* padding: 14px 14px; */
+    margin: 8px 2px 0 2px;
   }
 }
 @media (max-width: 414px) {
