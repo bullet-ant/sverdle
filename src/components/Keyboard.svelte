@@ -51,38 +51,47 @@
   };
 </script>
 
-{#each keys as key, index}
-  <div class="container-fluid">
-    <div class="row justify-content-center keyboard">
-      {#if index == 2}
-        <div class="col-xs-1">
-          <button on:click={handleDelete} class="action-button">
-            <i class="fa fa-backspace" />
-          </button>
-        </div>
-      {/if}
-      {#each key.split("") as letter}
-        <!-- <div class="col-xs-1"> -->
-        <button
-          on:click={() => handleClick(letter)}
-          class={`${getKeyboardLetterClass(letter)}`}
-        >
-          {letter}
-        </button>
-        <!-- </div> -->
-      {/each}
-      {#if index == 2}
-        <div class="col-xs-1">
-          <button on:click={handleEnter} class="action-button"
-            ><i class="fa fa-check" aria-hidden="true" /></button
+<div class="footer">
+  {#each keys as key, index}
+    <div class="container-fluid">
+      <div class="row justify-content-center keyboard">
+        {#if index == 2}
+          <div class="col-xs-1">
+            <button on:click={handleDelete} class="action-button">
+              <i class="fa fa-backspace" />
+            </button>
+          </div>
+        {/if}
+        {#each key.split("") as letter}
+          <!-- <div class="col-xs-1"> -->
+          <button
+            on:click={() => handleClick(letter)}
+            class={`${getKeyboardLetterClass(letter)}`}
           >
-        </div>
-      {/if}
+            {letter}
+          </button>
+          <!-- </div> -->
+        {/each}
+        {#if index == 2}
+          <div class="col-xs-1">
+            <button on:click={handleEnter} class="action-button"
+              ><i class="fa fa-check" aria-hidden="true" /></button
+            >
+          </div>
+        {/if}
+      </div>
     </div>
-  </div>
-{/each}
+  {/each}
+</div>
 
 <style>
+  .footer {
+    position:absolute;
+    bottom: 10px;
+    width: 100%;
+    height: auto;
+
+  }
   .action-button {
     background-color: rgb(169, 170, 255);
     color: white;
