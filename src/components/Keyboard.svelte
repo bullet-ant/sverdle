@@ -1,24 +1,32 @@
 <script>
+  import { createEventDispatcher } from "svelte";
   import {
     currentAttempt,
     currentGuess,
     guesses,
+    haveLost,
     haveWon,
     keyboardLetterClass,
+    maxGuesses,
     word,
   } from "../lib/store";
   import { getWordList } from "../lib/word_selector";
+
+  const dispatch = createEventDispatcher();
+
   let keys = ["QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM"];
 
   $: getKeyboardLetterClass = (letter) => {
     return $keyboardLetterClass[letter.toLowerCase()];
   };
   const handleClick = (letter) => {
+    if ($haveWon || $haveLost) return;
     if ($currentGuess.length < 5) {
       $currentGuess += letter;
     }
   };
   const handleEnter = () => {
+    if ($haveWon || $haveLost) return;
     if ($currentGuess.length === 5) {
       if (getWordList().indexOf($currentGuess.toLowerCase()) != -1) {
         $guesses[$currentAttempt] = $currentGuess;
@@ -27,14 +35,18 @@
         if ($currentGuess.toLowerCase() === $word.toLowerCase())
           haveWon.set(true);
         $currentGuess = "";
+        if ($currentAttempt === $maxGuesses) {
+          haveLost.set(true);
+          dispatch("won", { attempt: $currentAttempt });
+        }
       } else {
-        // console.log(getWordList().includes('apple'));
-        console.log(getWordList());
+        dispatch("invalid", { attempt: $currentAttempt });
       }
     }
   };
 
   const handleDelete = () => {
+    if ($haveWon || $haveLost) return;
     $currentGuess = $currentGuess.slice(0, -1);
   };
 </script>
@@ -50,14 +62,14 @@
         </div>
       {/if}
       {#each key.split("") as letter}
-        <div class="col-xs-1">
-          <button
-            on:click={() => handleClick(letter)}
-            class={`${getKeyboardLetterClass(letter)}`}
-          >
-            {letter}
-          </button>
-        </div>
+        <!-- <div class="col-xs-1"> -->
+        <button
+          on:click={() => handleClick(letter)}
+          class={`${getKeyboardLetterClass(letter)}`}
+        >
+          {letter}
+        </button>
+        <!-- </div> -->
       {/each}
       {#if index == 2}
         <div class="col-xs-1">

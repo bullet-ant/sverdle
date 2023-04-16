@@ -1,13 +1,23 @@
-.heading {
-  text-align: center;
-  padding-top: 10px;
-  font-size: 42px;
-  font-weight: bold;
-  font-family: "Nova Oval", cursive;
-}
+
 .guesses {
   text-align: center;
   height: 62px;
+}
+
+.help-guess {
+  font-family: "Prompt", sans-serif;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+  padding: 15px;
+  width: 50px;
+  height: 50px;
+  background-color: white;
+  color: black;
+  margin: 1px;
+  border: #d3d6da solid;
 }
 
 .letter {
@@ -29,19 +39,19 @@
 .letter-correct {
   background-color: #6aaa64;
   color: white;
-  border: #6aaa64 solid;
+  border: none;
 }
 
 .letter-incorrect {
   background-color: #787c7e;
   color: white;
-  border: #787c7e solid;
+  border: none;
 }
 
 .letter-present {
   background-color: #c9b458;
   color: white;
-  border: #c9b458 solid;
+  border: none;
 }
 .keyboard {
   /* text-align: center; */
@@ -49,16 +59,54 @@
 
 .keyboard button {
   font-family: "Prompt", sans-serif;
-  background-color: #eeeeee;
-  border: white solid;
+  font-size: 20px;
+  font-weight: bold;
   color: grey;
-  /* width: 45px; */
-  padding: 12px 14px;
+  background-color: #eeeeee;
+  border: none;
+  margin: 2px;
+  padding: 14px 14px;
+  margin: 8px 3px 0 3px;
   text-align: center;
   text-decoration: none;
-  font-size: 20px;
   display: inline-block;
+}
+.my-modal {
+  position: fixed;
+  top: 12%;
+  left: 50%;
+  /* transform: translate(-50%, -50%) scale(0); */
+  /* transition: 1000ms ease-in-out; */
+  border: none;
+  z-index: 1;
+  color: white;
+  background-color: rgb(0, 0, 0);
+  /* width: 20%; */
+  max-width: 80%;
+}
+.my-modal.active {
+  transform: translate(-50%, -50%) scale(1);
+}
+.my-modal-body {
+  font-size: 20px;
   font-weight: bold;
+  text-align: center;
+  padding: 0px 10px 2px 10px;
+}
+#overlay {
+  position: fixed;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: 300ms ease-in-out;
+  pointer-events: none;
+}
+#overlay.active {
+  pointer-events: all;
+  opacity: 1;
 }
 
 /* @media (max-width: 720px) {
@@ -69,13 +117,14 @@
     margin-bottom: 18px;
   }
 } */
-@media (max-width: 540px) {
+@media (max-width: 600px) {
+  .title {
+    font-size: 30px;
+  }
   .keyboard button {
-    font-size: 16px;
-    padding: 12px 12px;
-    margin-bottom: 14px;
-    margin-left: 2px;
-    margin-right: 2px;
+    font-size: 17px;
+    padding: 15px 16px;
+    margin: 10px 2px 0px 2px;
   }
   .guesses {
     height: 60px;
@@ -88,24 +137,30 @@
     height: 55px;
   }
 }
-@media (max-width: 402px) {
-  .heading {
+@media (max-width: 474px) {
+  .keyboard button {
+    font-size: 15px;
+    padding: 14px;
+    margin: 10px 1px 0px 2px;
+  }
+}
+@media (max-width: 414px) {
+  .title {
     font-size: 25px;
-
   }
   .keyboard button {
     font-size: 16px;
-    padding: 10px 9px;
-    margin-bottom: 5px;
+    padding: 11px;
+    margin: 10px 2px 0px 2px;
   }
   .guesses {
-    height: 45px;
+    height: 58px;
   }
   .letter {
-    font-size: 20px;
+    font-size: 24px;
     font-weight: bold;
     padding: 15px 15px;
-    width: 42px;
-    height: 42px;
+    width: 56px;
+    height: 56px;
   }
 }

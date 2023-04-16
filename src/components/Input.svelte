@@ -1,14 +1,21 @@
 <script>
+  import { createEventDispatcher } from "svelte";
+  import { getWordList } from "../lib/word_selector";
   import {
     currentAttempt,
     currentGuess,
     guesses,
+    haveLost,
     haveWon,
     word,
   } from "../lib/store";
-  import { getWordList } from "../lib/word_selector";
+
+  const dispatch = createEventDispatcher();
 
   const handleKeydown = (e) => {
+    // No input if game is over.
+    if ($haveWon || $haveLost) return;
+
     const key = e.keyCode;
 
     // Alphabet key pressed
@@ -28,19 +35,16 @@
           $guesses[$currentAttempt] = $currentGuess;
           currentAttempt.update((attempt) => attempt + 1);
 
-          if ($currentGuess.toLowerCase() === $word.toLowerCase())
+          if ($currentGuess.toLowerCase() === $word.toLowerCase()) {
             haveWon.set(true);
+            dispatch("won", { attempt: $currentAttempt });
+          }
           $currentGuess = "";
-        }else {
-          // console.log(getWordList().includes('apple'));
-          console.log(getWordList());
+        } else {
+          dispatch("invalid", { attempt: $currentAttempt });
         }
       }
     }
-    guesses.update((obj) => obj);
-    console.log(
-      `Current Guess - ${$currentGuess} Have Won - ${$haveWon} Guesses - ${$guesses}`
-    );
   };
 </script>
 

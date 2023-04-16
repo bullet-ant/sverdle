@@ -1,14 +1,14 @@
 <script>
-  import { quintOut } from "svelte/easing";
+  import Input from "./Input.svelte";
+  import Keyboard from "./Keyboard.svelte";
   import {
     guesses,
     currentGuess,
     word,
+    haveWon,
     keyboardLetterClass,
     currentAttempt,
   } from "../lib/store";
-  import { fade, fly, slide } from "svelte/transition";
-  import { flip } from "svelte/animate";
 
   const invisibleChar = `‎`;
   $: getCurrentGuess = () => {
@@ -49,6 +49,8 @@
 
   const verifyOccurrences = (guess, letter, index) => {
     const re = new RegExp(letter, "g");
+    // word   - HELLO
+    // guess  - EAGLE
     const guessPreMatch = (guess.slice(0, index + 1).match(re) || []).length;
     const guessPostMatch = (guess.slice(index + 1).match(re) || []).length;
     const wordPreMatch = ($word.match(re) || []).length;
@@ -58,7 +60,20 @@
     if (guessPreMatch > wordPreMatch) return false;
     return true;
   };
+  let invalidGuess = false;
+  const handleInvalid = (event) => {
+    invalidGuess = true;
+    setTimeout(() => {
+      invalidGuess = false;
+    }, 1000);
+  };
 </script>
+
+{#if invalidGuess}
+  <div class="my-modal active">
+    <div class="my-modal-body">Not in word list</div>
+  </div>
+{/if}
 
 <!-- Guesses: ["WORD1", "WORD2", "", "", ""] -->
 {#each $guesses as guess, index}
@@ -71,7 +86,8 @@
             guess,
             letter,
             letterIndex
-          )} guess-${index}-${letterIndex}`}
+          )} guess-animation`}
+          class:won-animation={index == $currentAttempt - 1 && $haveWon}
         >
           {letter}
         </div>
@@ -79,7 +95,7 @@
       <!-- Current Guess: ["W", "O"] (as the user inputs) -->
     {:else if $currentAttempt == index}
       {#each getCurrentGuess().split("") as letter, letterIndex}
-        <div class="letter">
+        <div class="letter" class:invalid-animation={invalidGuess}>
           {letter}
         </div>
       {/each}
@@ -93,48 +109,18 @@
     {/if}
   </div>
 {/each}
-<br />
+<Input on:invalid={handleInvalid} />
+<Keyboard on:invalid={handleInvalid} />
 
 <style>
-  .guess-0-0,
-  .guess-1-0,
-  .guess-2-0,
-  .guess-3-0,
-  .guess-4-0,
-  .guess-5-0 {
+  .guess-animation {
     animation: flip 600ms linear;
   }
-  .guess-0-1,
-  .guess-1-1,
-  .guess-2-1,
-  .guess-3-1,
-  .guess-4-1,
-  .guess-5-1 {
-    animation: flip 600ms linear;
+  .invalid-animation {
+    animation: shake 500ms 1;
   }
-  .guess-0-2,
-  .guess-1-2,
-  .guess-2-2,
-  .guess-3-2,
-  .guess-4-2,
-  .guess-5-2 {
-    animation: flip 600ms linear;
-  }
-  .guess-0-3,
-  .guess-1-3,
-  .guess-2-3,
-  .guess-3-3,
-  .guess-4-3,
-  .guess-5-3 {
-    animation: flip 600ms linear;
-  }
-  .guess-0-4,
-  .guess-1-4,
-  .guess-2-4,
-  .guess-3-4,
-  .guess-4-4,
-  .guess-5-4 {
-    animation: flip 600ms linear;
+  .won-animation {
+    animation: jump 600ms infinite;
   }
   @keyframes flip {
     0% {
@@ -147,6 +133,50 @@
       background-color: white;
       color: black;
       border: #d3d6da solid;
+    }
+  }
+
+  @keyframes shake {
+    0% {
+      transform: translate(1px, 1px) rotate(0deg);
+    }
+    10% {
+      transform: translate(-1px, -2px) rotate(-1deg);
+    }
+    20% {
+      transform: translate(-3px, 0px) rotate(1deg);
+    }
+    30% {
+      transform: translate(3px, 2px) rotate(0deg);
+    }
+    40% {
+      transform: translate(1px, -1px) rotate(1deg);
+    }
+    50% {
+      transform: translate(-1px, 2px) rotate(-1deg);
+    }
+    60% {
+      transform: translate(-3px, 1px) rotate(0deg);
+    }
+    70% {
+      transform: translate(3px, 1px) rotate(-1deg);
+    }
+    80% {
+      transform: translate(-1px, -1px) rotate(1deg);
+    }
+    90% {
+      transform: translate(1px, 2px) rotate(0deg);
+    }
+    100% {
+      transform: translate(1px, -2px) rotate(-1deg);
+    }
+  }
+  @keyframes jump {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
     }
   }
 </style>
