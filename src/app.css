@@ -52,81 +52,10 @@
   color: white;
   border: none;
 }
-.keyboard {
-  /* text-align: center; */
-}
 
-.keyboard button {
-  font-family: "Prompt", sans-serif;
-  font-size: 20px;
-  font-weight: bold;
-  color: grey;
-  background-color: #eeeeee;
-  border: none;
-  width: 45px;
-  height: 60px;
-  /* padding: 14px 14px; */
-  margin: 8px 2px 0 2px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-}
-.my-modal {
-  position: fixed;
-  top: 12%;
-  left: 50%;
-  /* transform: translate(-50%, -50%) scale(0); */
-  /* transition: 1000ms ease-in-out; */
-  border: none;
-  z-index: 1;
-  color: white;
-  background-color: rgb(0, 0, 0);
-  /* width: 20%; */
-  max-width: 80%;
-}
-.my-modal.active {
-  transform: translate(-50%, -50%) scale(1);
-}
-.my-modal-body {
-  font-size: 20px;
-  font-weight: bold;
-  text-align: center;
-  padding: 0px 10px 2px 10px;
-}
-#overlay {
-  position: fixed;
-  opacity: 0;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  transition: 300ms ease-in-out;
-  pointer-events: none;
-}
-#overlay.active {
-  pointer-events: all;
-  opacity: 1;
-}
-
-/* @media (max-width: 720px) {
-
-  .keyboard button {
-    font-size: 16px;
-    padding: 12px 12px;
-    margin-bottom: 18px;
-  }
-} */
 @media (max-width: 600px) {
   .title {
     font-size: 30px;
-  }
-  .keyboard button {
-    font-size: 18px;
-    width: 45px;
-    height: 60px;
-    /* padding: 14px 14px; */
-    margin: 8px 2px 0 2px;
   }
   .guesses {
     height: 62px;
@@ -140,22 +69,10 @@
   }
 }
 @media (max-width: 492px) {
-  .keyboard button {
-    font-size: 15px;
-    width: 40px;
-    height: 55px;
-    /* padding: 14px 14px; */
-    margin: 8px 2px 0 2px;
-  }
 }
 @media (max-width: 414px) {
   .title {
     font-size: 25px;
-  }
-  .keyboard button {
-    font-size: 16px;
-    padding: 11px;
-    margin: 10px 2px 0px 2px;
   }
   .guesses {
     height: 58px;

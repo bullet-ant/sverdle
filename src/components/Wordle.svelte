@@ -1,10 +1,9 @@
 <script>
-  import { word } from "../lib/store";
+  import { word } from "../utils/store";
   import Guesses from "./Guesses.svelte";
-  import Keyboard from "./Keyboard.svelte";
-  import Input from "./Input.svelte";
   import Navbar from "./Navbar.svelte";
   import Result from "./Result.svelte";
+  import Help from "./Help.svelte";
   localStorage["guessWord"] = $word;
 </script>
 
@@ -12,4 +11,5 @@
   <Navbar />
   <Result />
   <Guesses />
+  <Help />
 </main>

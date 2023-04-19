@@ -8,7 +8,7 @@
     haveWon,
     keyboardLetterClass,
     currentAttempt,
-  } from "../lib/store";
+  } from "../utils/store";
 
   const invisibleChar = `‎`;
   $: getCurrentGuess = () => {
@@ -74,45 +74,49 @@
     <div class="my-modal-body">Not in word list</div>
   </div>
 {/if}
-
-<!-- Guesses: ["WORD1", "WORD2", "", "", ""] -->
-{#each $guesses as guess, index}
-  <div class="guesses">
-    {#if guess}
-      <!-- Splitted Guess: ["W" ,"O", "R", "D", "1"] -->
-      {#each guess.split("") as letter, letterIndex}
-        <div
-          class={`letter ${getLetterClass(
-            guess,
-            letter,
-            letterIndex
-          )} guess-animation`}
-          class:won-animation={index == $currentAttempt - 1 && $haveWon}
-        >
-          {letter}
-        </div>
-      {/each}
-      <!-- Current Guess: ["W", "O"] (as the user inputs) -->
-    {:else if $currentAttempt == index}
-      {#each getCurrentGuess().split("") as letter, letterIndex}
-        <div class="letter" class:invalid-animation={invalidGuess}>
-          {letter}
-        </div>
-      {/each}
-      <!-- Fill empty guesses with invisible character -->
-    {:else}
-      {#each new Array(5).fill(invisibleChar) as letter}
-        <div class="letter">
-          {letter}
-        </div>
-      {/each}
-    {/if}
-  </div>
-{/each}
+<div class="guess-area">
+  <!-- Guesses: ["WORD1", "WORD2", "", "", ""] -->
+  {#each $guesses as guess, index}
+    <div class="guesses">
+      {#if guess}
+        <!-- Splitted Guess: ["W" ,"O", "R", "D", "1"] -->
+        {#each guess.split("") as letter, letterIndex}
+          <div
+            class={`letter ${getLetterClass(
+              guess,
+              letter,
+              letterIndex
+            )} guess-animation`}
+            class:won-animation={index == $currentAttempt - 1 && $haveWon}
+          >
+            {letter}
+          </div>
+        {/each}
+        <!-- Current Guess: ["W", "O"] (as the user inputs) -->
+      {:else if $currentAttempt == index}
+        {#each getCurrentGuess().split("") as letter, letterIndex}
+          <div class="letter" class:invalid-animation={invalidGuess}>
+            {letter}
+          </div>
+        {/each}
+        <!-- Fill empty guesses with invisible character -->
+      {:else}
+        {#each new Array(5).fill(invisibleChar) as letter}
+          <div class="letter">
+            {letter}
+          </div>
+        {/each}
+      {/if}
+    </div>
+  {/each}
+</div>
 <Input on:invalid={handleInvalid} />
 <Keyboard on:invalid={handleInvalid} />
 
 <style>
+  .guess-area {
+    /* display: flex; */
+  }
   .guess-animation {
     animation: flip 600ms linear;
   }

@@ -1,22 +1,30 @@
 <script>
   import { createEventDispatcher } from "svelte";
-  import { getWordList } from "../lib/word_selector";
+  import { getValidWords } from "../utils/word_selector";
   import {
     currentAttempt,
     currentGuess,
     guesses,
     haveLost,
     haveWon,
+    maxGuesses,
+    showHelp,
     word,
-  } from "../lib/store";
+  } from "../utils/store";
+  import { validWords } from "../utils/words_list";
 
   const dispatch = createEventDispatcher();
 
   const handleKeydown = (e) => {
-    // No input if game is over.
+    // No input registered if game is over.
     if ($haveWon || $haveLost) return;
 
     const key = e.keyCode;
+
+    // Escape pressed
+    if (key == 27) {
+      $showHelp = false;
+    }
 
     // Alphabet key pressed
     if ($currentGuess.length < 5 && key >= 65 && key <= 90) {
@@ -30,19 +38,21 @@
 
     // Enter key pressed
     if (e.keyCode === 13) {
-      if ($currentGuess.length === 5) {
-        if (getWordList().indexOf($currentGuess.toLowerCase()) != -1) {
-          $guesses[$currentAttempt] = $currentGuess;
-          currentAttempt.update((attempt) => attempt + 1);
+      const isGuessValid =
+        $currentGuess.length === 5 &&
+        validWords.includes($currentGuess.toLowerCase());
+      if (isGuessValid) {
+        $guesses[$currentAttempt] = $currentGuess;
+        $currentAttempt += 1;
 
-          if ($currentGuess.toLowerCase() === $word.toLowerCase()) {
-            haveWon.set(true);
-            dispatch("won", { attempt: $currentAttempt });
-          }
-          $currentGuess = "";
-        } else {
-          dispatch("invalid", { attempt: $currentAttempt });
-        }
+        if ($currentGuess.toLowerCase() === $word.toLowerCase())
+          haveWon.set(true);
+
+        if ($currentAttempt === $maxGuesses) haveLost.set(true);
+
+        $currentGuess = "";
+      } else {
+        dispatch("invalid", { attempt: $currentAttempt });
       }
     }
   };

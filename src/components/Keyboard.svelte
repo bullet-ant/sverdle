@@ -9,93 +9,140 @@
     keyboardLetterClass,
     maxGuesses,
     word,
-  } from "../lib/store";
-  import { getWordList } from "../lib/word_selector";
+  } from "../utils/store";
+  import { getValidWords } from "../utils/word_selector";
+  import { validWords } from "../utils/words_list";
 
   const dispatch = createEventDispatcher();
 
-  let keys = ["QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM"];
+  const keyboardRows = ["QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM"];
 
   $: getKeyboardLetterClass = (letter) => {
     return $keyboardLetterClass[letter.toLowerCase()];
   };
+
   const handleClick = (letter) => {
     if ($haveWon || $haveLost) return;
+
     if ($currentGuess.length < 5) {
-      $currentGuess += letter;
-    }
-  };
-  const handleEnter = () => {
-    if ($haveWon || $haveLost) return;
-    if ($currentGuess.length === 5) {
-      if (getWordList().indexOf($currentGuess.toLowerCase()) != -1) {
-        $guesses[$currentAttempt] = $currentGuess;
-        currentAttempt.update((attempt) => attempt + 1);
-
-        if ($currentGuess.toLowerCase() === $word.toLowerCase())
-          haveWon.set(true);
-        $currentGuess = "";
-        if ($currentAttempt === $maxGuesses) {
-          haveLost.set(true);
-          dispatch("won", { attempt: $currentAttempt });
-        }
-      } else {
-        dispatch("invalid", { attempt: $currentAttempt });
-      }
+      $currentGuess += letter.toUpperCase();
     }
   };
 
-  const handleDelete = () => {
+  const handleSave = () => {
     if ($haveWon || $haveLost) return;
+
+    const isGuessValid =
+      $currentGuess.length === 5 &&
+      validWords.includes($currentGuess.toLowerCase());
+    if (isGuessValid) {
+      $guesses[$currentAttempt] = $currentGuess;
+      $currentAttempt += 1;
+
+      if ($currentGuess.toLowerCase() === $word.toLowerCase())
+        haveWon.set(true);
+
+      if ($currentAttempt === $maxGuesses) haveLost.set(true);
+
+      $currentGuess = "";
+    } else {
+      dispatch("invalid", { attempt: $currentAttempt });
+    }
+  };
+
+  const handleBackspace = () => {
+    if ($haveWon || $haveLost) return;
+
     $currentGuess = $currentGuess.slice(0, -1);
   };
 </script>
 
 <div class="footer">
-  {#each keys as key, index}
-    <div class="container-fluid">
-      <div class="row justify-content-center keyboard">
-        {#if index == 2}
-          <div class="col-xs-1">
-            <button on:click={handleDelete} class="action-button">
-              <i class="fa fa-backspace" />
-            </button>
-          </div>
-        {/if}
-        {#each key.split("") as letter}
-          <!-- <div class="col-xs-1"> -->
-          <button
-            on:click={() => handleClick(letter)}
-            class={`${getKeyboardLetterClass(letter)}`}
-          >
-            {letter}
-          </button>
-          <!-- </div> -->
+  <div class="container-fluid">
+    <div class="center">
+      <table>
+        {#each keyboardRows as keyboardRow, rowNumber}
+          {#if rowNumber == 2 || rowNumber == 1 || rowNumber == 0}
+            <tr class="center">
+              {#if rowNumber == 2}
+                <div class="col-xs-1">
+                  <td
+                    ><button on:click={handleBackspace} class="action-button">
+                      <i class="fa fa-backspace" />
+                    </button>
+                  </td>
+                </div>
+              {/if}
+              {#each keyboardRow.split("") as key, keyIndex}
+                <td
+                  ><button
+                    on:click={() => handleClick(key)}
+                    class={`${getKeyboardLetterClass(key)}`}
+                  >
+                    {key}
+                  </button></td
+                >
+              {/each}
+
+              {#if rowNumber == 2}
+                <div class="col-xs-1">
+                  <td
+                    ><button on:click={handleSave} class="action-button"
+                      ><i class="fa fa-check" aria-hidden="true" /></button
+                    ></td
+                  >
+                </div>
+              {/if}
+            </tr>
+          {/if}
         {/each}
-        {#if index == 2}
-          <div class="col-xs-1">
-            <button on:click={handleEnter} class="action-button"
-              ><i class="fa fa-check" aria-hidden="true" /></button
-            >
-          </div>
-        {/if}
-      </div>
+      </table>
     </div>
-  {/each}
+  </div>
 </div>
 
 <style>
   .footer {
-    position:absolute;
+    position: absolute;
     bottom: 10px;
     width: 100%;
     height: auto;
-
   }
+
+  .center {
+    display: flex;
+    justify-content: center;
+  }
+  td {
+    padding: 2px;
+  }
+
+  button {
+    background-color: #eeeeee;
+    color: grey;
+    font-family: "Prompt", sans-serif;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    padding: 15px 8px;
+    margin: 1px;
+    width: 3rem;
+    text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    button {
+      width: 2rem;
+      height: 3rem;
+      margin: 0;
+    }
+  }
+
   .action-button {
     background-color: rgb(169, 170, 255);
     color: white;
   }
+
   .letter-correct {
     background-color: #6aaa64;
     color: white;
