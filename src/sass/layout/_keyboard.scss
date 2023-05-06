@@ -1,0 +1,48 @@
+.keyboard {
+  //   background-image: linear-gradient(to right,rgba($color-primary-light, 0.4),rgba($color-primary-dark, 0.4));
+  height: 32vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center;
+  margin-bottom: 3px;
+
+  [class^="keyboard__row--"] {
+    display: flex;
+    justify-content: center;
+    max-width: 98vw;
+  }
+
+  &__button {
+    height: 6.5rem;
+    width: 4.5rem;
+    margin: 2px;
+    background-color: $color-grey-light-1;
+    border: none;
+    border-radius: 2.5px;
+    cursor: pointer;
+    box-shadow: 0 0.75rem 0.5rem rgba($color-black, 0.15);
+    transition: all 0.2s;
+    &:hover {
+      transform: translateY(-0.25rem);
+      box-shadow: 0 0.75rem 1rem rgba($color-black, 0.15);
+    }
+    &:active {
+      transform: translateY(-0.15rem);
+      box-shadow: 0 1rem 0.75rem rgba($color-black, 0.15);
+    }
+
+    &--backspace {
+      background-image: linear-gradient(
+        rgba($color-tertiary-light, 0.5),
+        rgba($color-tertiary-dark, 0.5)
+      );
+    }
+    &--enter {
+      background-image: linear-gradient(
+        rgba($color-primary-light, 1),
+        rgba($color-primary-dark, 0.8)
+      );
+    }
+  }
+}

@@ -1,0 +1,38 @@
+.wordle {
+  height: 68vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+
+
+  &__guesses {
+    max-width: 95vw;
+    max-height: 100%;
+  }
+
+  [class^="wordle__guess--"] {
+    display: flex;
+  }
+
+  &__guess {
+    &--alphabet {
+      width: 6.4rem;
+      height: 6.7rem;
+      cursor: default;
+      display: flex;
+      font-size: 2.7rem;
+      font-weight: 600;
+      justify-content: center;
+      align-items: center;
+      margin: 2px;
+      &:last-child {
+        border-radius: 0 2.5px 2.5px 0;
+      }
+      &:first-child {
+        border-radius: 2.5px 0 0 2.5px;
+      }
+    }
+  }
+}

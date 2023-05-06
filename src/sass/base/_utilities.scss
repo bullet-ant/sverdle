@@ -1,0 +1,28 @@
+.flip {
+  // backface-visibility: hidden;
+  // animation: flip 0.6s;
+  transition: all 0.6s ease-out;
+  transform: rotateY(360deg);
+}
+
+.flipY {
+  animation: flipY 0.5s ease-out;
+}
+
+.shake {
+  animation: shake 0.5s;
+}
+
+.jump {
+  transition: all 0.6s ease-out;
+  transform: rotateY(360deg);
+  animation: jump 0.6s ease-out 0.4s infinite;
+}
+.overlay {
+  position: fixed;
+  background: rgba($color-black, 0.2);
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}

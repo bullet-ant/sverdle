@@ -1,0 +1,75 @@
+.help {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 2px;
+  box-shadow: 0 1rem 1rem rgba($color-black, 0.3);
+  z-index: 10;
+  background-image: linear-gradient(
+    rgba($color-flavor-background-2, 1),
+    rgba($color-flavor-background-2, 1)
+  );
+  min-width: 20%;
+  //   min-width: 88%;
+  max-width: 100%;
+
+  &__header {
+    padding: 10px 15px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &-heading {
+      font-size: 2.5rem;
+      font-weight: bold;
+    }
+    &-close-button {
+      cursor: pointer;
+      border: none;
+      background: none;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+  }
+
+  &__body {
+    padding: 1.5rem;
+    font-size: 1.5rem;
+
+    &-objective {
+      font-size: 1.7rem;
+      font-weight: bold;
+    }
+
+    & ul {
+      padding: 1rem 2.5rem;
+    }
+
+    &-examples {
+      padding: 0 1rem;
+    }
+
+    &-example {
+      padding: 1.2rem 0px 0px 0px;
+      display: flex;
+
+      &--letter {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: $color-grey-dark;
+        width: 4rem;
+        height: 5rem;
+        cursor: default;
+        background-color: $color-grey-light-3;
+
+        &:not(:last-child) {
+          margin-right: 3px;
+        }
+      }
+    }
+  }
+}
