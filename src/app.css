@@ -140,7 +140,7 @@ body {
       border-radius: 2.5px 0 0 2.5px; }
 
 .keyboard {
-  height: 32vh;
+  height: 22vh;
   display: flex;
   flex-direction: column;
   justify-content: end;
@@ -276,7 +276,7 @@ header {
   max-height: 10vh; }
 
 main {
-  max-height: 90vh;
+  height: 90vh;
   display: flex;
   flex-direction: column;
   position: relative; }
