@@ -113,7 +113,7 @@ body {
     right: 3rem; }
 
 .wordle {
-  height: 62vh;
+  height: 67vh;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -270,6 +270,10 @@ body {
 
 body {
   background-image: linear-gradient(#ffacac, #ffdfdf); }
+
+.fullscreen {
+  height: 100vh;
+  width: 100vw; }
 
 header {
   height: 10vh; }

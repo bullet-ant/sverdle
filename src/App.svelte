@@ -9,27 +9,29 @@
   import Confetti from "./components/Confetti.svelte";
 </script>
 
-{#if $showHelp}
-  <Overlay />
-{/if}
-{#if $haveWon}
-  <Confetti />
-{/if}
+<div class="fullscreen">
+  {#if $showHelp}
+    <Overlay />
+  {/if}
+  {#if $haveWon}
+    <Confetti />
+  {/if}
 
-<header class="header">
-  <Navbar />
-</header>
-<main>
-  <section class="help">
-    <Help />
-  </section>
-  <section class="wordle">
-    <Wordle />
-  </section>
-  <section class="status">
-    <Status />
-  </section>
-  <section class="keyboard">
-    <Keyboard />
-  </section>
-</main>
+  <header class="header">
+    <Navbar />
+  </header>
+  <main>
+    <section class="help">
+      <Help />
+    </section>
+    <section class="wordle">
+      <Wordle />
+    </section>
+    <section class="status">
+      <Status />
+    </section>
+    <section class="keyboard">
+      <Keyboard />
+    </section>
+  </main>
+</div>
