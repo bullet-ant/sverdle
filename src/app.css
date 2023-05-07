@@ -113,7 +113,7 @@ body {
     right: 3rem; }
 
 .wordle {
-  height: 65vh;
+  height: 62vh;
   display: flex;
   justify-content: center;
   flex-direction: column;
