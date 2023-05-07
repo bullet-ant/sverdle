@@ -7,7 +7,6 @@
     invalidGuess,
     haveWon,
   } from "../store/store";
-  console.log($word);
 
   const getAlphabetFrequency = (word, alphabet) => {
     (word.match(new RegExp(alphabet, "g")) || []).length;
@@ -41,7 +40,6 @@
       const slicedIndices = getAlphabetIndices(slicedGuess, currentAlphabet);
       const slicedFrequency = slicedIndices.length;
 
-      console.log(slicedIndices, actualIndices, currentAlphabet);
       return "letter-present";
     }
 

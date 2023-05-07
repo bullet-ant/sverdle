@@ -125,8 +125,8 @@ body {
   .wordle [class^="wordle__guess--"] {
     display: flex; }
   .wordle__guess--alphabet {
-    width: 6.4rem;
-    height: 6.7rem;
+    height: 6.2rem;
+    width: 6rem;
     cursor: default;
     display: flex;
     font-size: 2.7rem;
@@ -151,7 +151,7 @@ body {
     justify-content: center;
     max-width: 98vw; }
   .keyboard__button {
-    height: 6.5rem;
+    height: 5.9rem;
     width: 4.5rem;
     margin: 2px;
     background-color: #f6f6f6;

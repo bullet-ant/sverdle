@@ -44,7 +44,6 @@
 
     // Enter key pressed
     if (e.keyCode === 13) {
-      console.log($currentGuess);
       const isGuessValid =
         $currentGuess.length === 5 &&
         validWords.includes($currentGuess.toLowerCase());
@@ -65,7 +64,6 @@
           $invalidGuess = false;
         }, 800);
       }
-      console.log($guesses);
     }
   };
   // Click Functions
