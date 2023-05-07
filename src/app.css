@@ -276,7 +276,7 @@ header {
   height: 10vh; }
 
 main {
-  height: 90vh;
+  height: 80vh;
   display: flex;
   flex-direction: column;
   position: relative; }
