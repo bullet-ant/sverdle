@@ -143,7 +143,7 @@ body {
   height: 32vh;
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: end;
   align-items: center;
   margin-bottom: 3px; }
   .keyboard [class^="keyboard__row--"] {
@@ -273,10 +273,10 @@ body {
   background-image: linear-gradient(#ffacac, #ffdfdf); }
 
 header {
-  height: 10vh; }
+  max-height: 10vh; }
 
 main {
-  height: 90vh;
+  max-height: 90vh;
   display: flex;
   flex-direction: column;
   position: relative; }
