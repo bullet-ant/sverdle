@@ -1,11 +1,10 @@
 .keyboard {
   //   background-image: linear-gradient(to right,rgba($color-primary-light, 0.4),rgba($color-primary-dark, 0.4));
-  height: 22vh;
+  max-height: 22vh;
   display: flex;
   flex-direction: column;
   justify-content: end;
   align-items: center;
-  margin-bottom: 3px;
 
   [class^="keyboard__row--"] {
     display: flex;
