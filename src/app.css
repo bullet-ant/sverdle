@@ -98,6 +98,12 @@ body {
 
 html {
   font-size: 62.5%; }
+  @media (max-width: 900px) {
+    html {
+      font-size: 80%; } }
+  @media (max-width: 600px) {
+    html {
+      font-size: 62.5%; } }
 
 body {
   box-sizing: border-box; }
@@ -113,7 +119,7 @@ body {
     right: 3rem; }
 
 .wordle {
-  height: 67vh;
+  height: 50vh;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -125,8 +131,8 @@ body {
   .wordle [class^="wordle__guess--"] {
     display: flex; }
   .wordle__guess--alphabet {
-    height: 6.2rem;
-    width: 6rem;
+    height: 5.5rem;
+    width: 5.2rem;
     cursor: default;
     display: flex;
     font-size: 2.7rem;
@@ -134,13 +140,21 @@ body {
     justify-content: center;
     align-items: center;
     margin: 2px; }
+    @media (max-width: 600px) {
+      .wordle__guess--alphabet {
+        height: 6.3rem;
+        width: 5.8rem; } }
+    @media (max-width: 900px) {
+      .wordle__guess--alphabet {
+        height: 7rem;
+        width: 6.2rem; } }
     .wordle__guess--alphabet:last-child {
       border-radius: 0 2.5px 2.5px 0; }
     .wordle__guess--alphabet:first-child {
       border-radius: 2.5px 0 0 2.5px; }
 
 .keyboard {
-  max-height: 22vh;
+  max-height: 30vh;
   display: flex;
   flex-direction: column;
   justify-content: end;
@@ -150,7 +164,7 @@ body {
     justify-content: center;
     max-width: 98vw; }
   .keyboard__button {
-    height: 5.9rem;
+    height: 5.5rem;
     width: 4.5rem;
     margin: 2px;
     background-color: #f6f6f6;
@@ -159,6 +173,14 @@ body {
     cursor: pointer;
     box-shadow: 0.1rem 0.1rem 0.4rem rgba(0, 0, 0, 0.2);
     transition: all 0.1s; }
+    @media (max-width: 600px) {
+      .keyboard__button {
+        height: 5.5rem;
+        width: 100%; } }
+    @media (max-width: 900px) {
+      .keyboard__button {
+        height: 6.5rem;
+        width: 5rem; } }
     .keyboard__button:last-child {
       box-shadow: 0.1rem 0.1rem 0.4rem rgba(0, 0, 0, 0.2); }
     .keyboard__button:first-child {
@@ -230,7 +252,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 1.2rem;
+  height: 5vh;
   font-size: 1.2rem; }
 
 .letter-correct {
@@ -280,10 +302,14 @@ body {
   width: 100vw; }
 
 header {
-  height: 10vh; }
+  height: 9vh; }
 
 main {
   height: 90vh;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   position: relative; }
+  @media (max-width: 600px) {
+    main {
+      height: 87vh; } }

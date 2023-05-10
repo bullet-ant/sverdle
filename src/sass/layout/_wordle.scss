@@ -1,5 +1,5 @@
 .wordle {
-  height: 67vh;
+  height: 50vh;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -17,8 +17,17 @@
 
   &__guess {
     &--alphabet {
-      height: 6.2rem;
-      width: 6rem;
+      @include respond-phone {
+        height: 6.3rem;
+        width: 5.8rem;  
+      }
+      @include respond-tablet-portrait {
+        height: 7rem;
+        width: 6.2rem;  
+      }
+
+      height: 5.5rem;
+      width: 5.2rem;
       cursor: default;
       display: flex;
       font-size: 2.7rem;

@@ -1,6 +1,6 @@
 .keyboard {
   //   background-image: linear-gradient(to right,rgba($color-primary-light, 0.4),rgba($color-primary-dark, 0.4));
-  max-height: 22vh;
+  max-height: 30vh;
   display: flex;
   flex-direction: column;
   justify-content: end;
@@ -13,7 +13,15 @@
   }
 
   &__button {
-    height: 5.9rem;
+    @include respond-phone {
+      height: 5.5rem;
+      width: 100%;
+    }
+    @include respond-tablet-portrait {
+      height: 6.5rem;
+      width: 5rem;
+    }
+    height: 5.5rem;
     width: 4.5rem;
     margin: 2px;
     background-color: $color-grey-light-1;

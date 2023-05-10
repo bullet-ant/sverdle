@@ -11,12 +11,17 @@ body {
 }
 
 header {
-  height: 10vh;
+  height: 9vh;
 }
 
 main {
   height: 90vh;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   position: relative;
+  
+  @include respond-phone {
+    height: 87vh;    
+  }
 }

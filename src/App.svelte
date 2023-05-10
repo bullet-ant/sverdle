@@ -24,12 +24,14 @@
     <section class="help">
       <Help />
     </section>
-    <section class="status">
-      <Status />
-    </section>
-    <section class="wordle">
-      <Wordle />
-    </section>
+    <div class="guessarea">
+      <section class="status">
+        <Status />
+      </section>
+      <section class="wordle">
+        <Wordle />
+      </section>
+    </div>
     <section class="keyboard">
       <Keyboard />
     </section>
