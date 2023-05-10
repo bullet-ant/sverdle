@@ -4,7 +4,7 @@
   import Keyboard from "./components/Keyboard.svelte";
   import Help from "./components/Help.svelte";
   import Overlay from "./components/Overlay.svelte";
-  import { haveWon, showHelp } from "./store/store";
+  import { haveWon, keyboardLetterClass, showHelp } from "./store/store";
   import Status from "./components/Status.svelte";
   import Confetti from "./components/Confetti.svelte";
 </script>
@@ -24,11 +24,11 @@
     <section class="help">
       <Help />
     </section>
-    <section class="wordle">
-      <Wordle />
-    </section>
     <section class="status">
       <Status />
+    </section>
+    <section class="wordle">
+      <Wordle />
     </section>
     <section class="keyboard">
       <Keyboard />

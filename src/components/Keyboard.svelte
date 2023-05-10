@@ -113,7 +113,15 @@
 
 {#each keyboardRows as keyboardRow, rowNumber}
   <div class={`keyboard__row--${rowNumber}`}>
-    {#if rowNumber == 2}
+    {#each keyboardRow.split("") as key, keyIndex}
+      <button
+        on:click={() => handleClick(key)}
+        class={`keyboard__button ${$keyboardLetterClass[key]}`}
+      >
+        {key}
+      </button>
+    {/each}
+    {#if rowNumber == 1}
       <button
         on:click={handleBackspace}
         class="keyboard__button keyboard__button--backspace"
@@ -121,11 +129,6 @@
         <i class="fa fa-backspace" />
       </button>
     {/if}
-    {#each keyboardRow.split("") as key, keyIndex}
-      <button on:click={() => handleClick(key)} class="keyboard__button">
-        {key}
-      </button>
-    {/each}
     {#if rowNumber == 2}
       <button
         on:click={handleSave}

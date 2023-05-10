@@ -157,8 +157,12 @@ body {
     border: none;
     border-radius: 2.5px;
     cursor: pointer;
-    box-shadow: 0 0.75rem 0.5rem rgba(0, 0, 0, 0.15);
-    transition: all 0.2s; }
+    box-shadow: 0.1rem 0.1rem 0.4rem rgba(0, 0, 0, 0.2);
+    transition: all 0.1s; }
+    .keyboard__button:last-child {
+      box-shadow: 0.1rem 0.1rem 0.4rem rgba(0, 0, 0, 0.2); }
+    .keyboard__button:first-child {
+      box-shadow: -0.1rem 0.1rem 0.4rem rgba(0, 0, 0, 0.2); }
     .keyboard__button:hover {
       transform: translateY(-0.25rem);
       box-shadow: 0 0.75rem 1rem rgba(0, 0, 0, 0.15); }
@@ -223,11 +227,11 @@ body {
           margin-right: 3px; }
 
 .status {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 15; }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 1.2rem;
+  font-size: 1.2rem; }
 
 .letter-correct {
   background-color: #6aaa64;
@@ -254,7 +258,7 @@ body {
 
 .letter {
   background-color: #f6f6f6;
-  box-shadow: 0 0.75rem 0.5rem rgba(0, 0, 0, 0.15); }
+  box-shadow: 0.3rem 0.4rem 0.4rem rgba(0, 0, 0, 0.2); }
 
 .confetti {
   position: fixed;

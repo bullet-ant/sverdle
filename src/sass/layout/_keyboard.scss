@@ -20,8 +20,17 @@
     border: none;
     border-radius: 2.5px;
     cursor: pointer;
-    box-shadow: 0 0.75rem 0.5rem rgba($color-black, 0.15);
-    transition: all 0.2s;
+    // box-shadow: 0 0.75rem 0.5rem rgba($color-black, 0.15);
+    &:last-child {
+      box-shadow: 0.1rem 0.1rem 0.4rem rgba($color-black, 0.2);
+    }
+    &:first-child {
+      box-shadow: -0.1rem 0.1rem 0.4rem rgba($color-black, 0.2);
+    }
+
+    box-shadow: 0.1rem 0.1rem 0.4rem rgba($color-black, 0.2);
+
+    transition: all 0.1s;
     &:hover {
       transform: translateY(-0.25rem);
       box-shadow: 0 0.75rem 1rem rgba($color-black, 0.15);

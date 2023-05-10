@@ -6,10 +6,11 @@
     currentAttempt,
     invalidGuess,
     haveWon,
+    keyboardLetterClass,
   } from "../store/store";
 
   const getAlphabetFrequency = (word, alphabet) => {
-    (word.match(new RegExp(alphabet, "g")) || []).length;
+    return (word.match(new RegExp(alphabet, "g")) || []).length;
   };
 
   const getAlphabetIndices = (word, alphabet) => {
@@ -22,24 +23,46 @@
     }
     return indices;
   };
+
   const verifyCharacter = (guess, guessId, alphabetId) => {
-    if ($guesses[guessId].charAt(alphabetId) === "") return "letter";
+    const alphabet = $guesses[guessId].charAt(alphabetId);
 
-    if (!$word.includes($guesses[guessId].charAt(alphabetId)))
+    // No guesses yet #ffffff
+    if (alphabet === "") return "letter";
+
+    // Guessed alphabet not in Actual Word #787c7e
+    if (!$word.includes(alphabet)) {
+      $keyboardLetterClass[alphabet] = "letter-incorrect"
       return "letter-incorrect";
+    }
+    
+    if ($word.includes(alphabet)) {
+      // Guessed alphabet present in correct position #6aaa64
+      if ($word.charAt(alphabetId) == alphabet) {
+        $keyboardLetterClass[alphabet] = "letter-correct";
+        return "letter-correct";
+      }
 
-    if ($word[alphabetId] == $guesses[guessId].charAt(alphabetId))
-      return "letter-correct";
+      // All previous guesses got their colors #787c7e
+      if (
+        getAlphabetFrequency($word, alphabet) <=
+        getAlphabetFrequency(guess.substring(0, alphabetId), alphabet)
+      ) 
+        return "letter-incorrect";
 
-    if ($word.includes($guesses[guessId].charAt(alphabetId))) {
-      const currentAlphabet = guess.charAt(alphabetId);
-      const actualIndices = getAlphabetIndices($word, currentAlphabet);
-      const actualFrequency = actualIndices.length;
+      const actualIndices = getAlphabetIndices($word, alphabet);
 
-      const slicedGuess = guess.slice(0, alphabetId);
-      const slicedIndices = getAlphabetIndices(slicedGuess, currentAlphabet);
-      const slicedFrequency = slicedIndices.length;
+      const rightSlicedGuess =
+        "@".repeat(alphabetId + 1) + guess.slice(alphabetId + 1);
+      const rightSlicedIndices = getAlphabetIndices(rightSlicedGuess, alphabet);
 
+      // If all later guesses are at correct position, this should be #787c7e
+      if (
+        !actualIndices.filter((val) => !rightSlicedIndices.includes(val)).length
+      )
+        return "letter-incorrect";
+
+      $keyboardLetterClass[alphabet] = "letter-present";
       return "letter-present";
     }
 
