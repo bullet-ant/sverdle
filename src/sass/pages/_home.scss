@@ -21,7 +21,4 @@ main {
   justify-content: space-between;
   position: relative;
   
-  @include respond-phone {
-    height: 87vh;    
-  }
 }
